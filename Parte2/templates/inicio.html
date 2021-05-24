@@ -24,9 +24,11 @@
             <div class="col-xl-4 col-lg-5">
                 <div class="featured-text text-center text-lg-left">
                     <h4>{{randomip}}</h4>
+                    <p class="mb-0 text-gray-50"><strong>Puertos Abiertos:</strong>
                     {%for puerto in answer.ports%}
-                    <p class="mb-0 text-gray-50"><strong>Puerto:</strong> {{puerto}}</p>
+                        {{puerto}}
                     {%endfor%}
+                    </p>
                     <p class="mb-0 text-gray-50"><strong> Ciudad:</strong> {{answer.city}}</p>
                     <p class="mb-0 text-gray-50"><strong>País:</strong> {{answer.country_code}}</p>
                     <p class="mb-0 text-gray-50"><strong>Organización:</strong> {{answer.org}}</p>
@@ -43,9 +45,11 @@
                     <div class="d-flex h-100">
                         <div class="project-text w-100 my-auto text-center text-lg-left">
                             <h4 class="text-white">{{randomcamip}}</h4>
+                            <p class="mb-0 text-white-50">Puertos Abiertos:
                             {%for puertos in answer1.ports%}
-                            <p class="mb-0 text-white-50">Puerto:{{puertos}}</p>
+                                {{puertos}}
                             {%endfor%}
+                            </p>
                             <p class="mb-0 text-white-50">Ciudad: {{answer1.city}}</p>
                             <p class="mb-0 text-white-50">País: {{answer1.country_code}}</p>
                             <p class="mb-0 text-white-50">Organización: {{answer1.org}}</p>
@@ -65,9 +69,11 @@
                     <div class="d-flex h-100">
                         <div class="project-text w-100 my-auto text-center text-lg-right">
                             <h4 class="text-white">{{randomcamip2}}</h4>
-                            {%for puertos in answer2.ports%}
-                            <p class="mb-0 text-white-50">Puerto: {{puertos}}</p>
+                            <p class="mb-0 text-white-50">Puertos Abiertos:
+                            {%for puertos in answer1.ports%}
+                                {{puertos}}
                             {%endfor%}
+                            </p>
                             <p class="mb-0 text-white-50">Ciudad: {{answer2.city}}</p>
                             <p class="mb-0 text-white-50">País: {{answer2.country_code}}</p>
                             <p class="mb-0 text-white-50">Organización: {{answer2.org}}</p>
