@@ -38,4 +38,5 @@ def inicio():
     ipinfo2=session.get(webscan_base+'host/'+randomcamip2,params=payload)
     return render_template('inicio.html', randomip=randomip, answer=ipinfo.json(), randomcamip=randomcamip1, randomcamip2=randomcamip2, answer1=ipinfo1.json(), answer2=ipinfo2.json())
 
+@app.route('/hostscan', methods=["GET",])
 app.run(debug=True)
