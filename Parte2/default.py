@@ -59,10 +59,6 @@ def hostscan():
 def host(ip):
     host=session.get(webscan_base+"host/"+ip, params=payload)
     respuesta=host.json()
-    if respuesta["ip_str"]==str(ip):
-        return render_template('host.html',respuesta=respuesta)
-    else:
-        abort(404)
-
+    return render_template('host.html',respuesta=respuesta, ip=ip)
 
 app.run(debug=True)
