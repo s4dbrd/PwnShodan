@@ -25,7 +25,7 @@ def inicio():
     randomip=random.choice(ips)
     ipinfo=session.get(webscan_base+'host/'+randomip,params=payload)
 
-    cam=session.get(webscan_base+'host/search?query=port:554 country:es has_screenshot:1 -screenshot.label:blank',params=payload)
+    cam=session.get(webscan_base+'host/search?query=port:554 country:es has_screenshot:1 -screenshot.label:blank city:"Sevilla"',params=payload)
     cam.raw.chunked=True
     cam.encoding='utf-8'
     respuesta=cam.json()
