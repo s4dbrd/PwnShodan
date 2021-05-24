@@ -1,3 +1,11 @@
 {%extends "base.html"%}
 {%block title%}Inicio{%endblock%}
 {%block content%}
+<h4>Búsqueda</h4>
+<p class="mb-0 text-gray-50"><strong> Query:</strong> <select name="query"></p>
+    {%for i in query%}
+            <option value="{{i}}" selected>{{i}}</option>
+    {%endfor%}
+</select>
+<button class="send_btn">Buscar</button>
+{%endblock%}
