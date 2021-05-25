@@ -58,11 +58,11 @@ def hostscan():
             respuestas.append(ip_list)
         return render_template('hostscan.html', query=query, filtro=filtro, filtrado=filtrado, respuestas=respuestas)
 
-@app.route('/host/<int:ip>', methods=["GET"])
+@app.route('/host/<string:ip>', methods=["GET"])
 def host(ip):
     host=session.get(webscan_base+"host/"+ip, params=payload)
     respuesta=host.json()
-    ippag=int(respuesta["ip_str"])
+    ippag=respuesta["ip_str"]
     if ippag == ip:
         return render_template('host.html',respuesta=respuesta, ippag=ippag)
 

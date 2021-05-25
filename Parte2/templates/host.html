@@ -1,5 +1,22 @@
 {%extends "base.html"%}
-{%block title%}{{ip}}{%endblock%}
+{%block title%}{{respuesta.ip_str}}{%endblock%}
 {%block content%}
     <h2>{{respuesta.ip_str}}</h2>
+    <p class="mb-0 text-gray-50"><strong>Puertos Abiertos:</strong>
+        {%for puertos in respuesta.ports%}
+            {{puertos}}
+        {%endfor%}
+        </p>
+        <p class="mb-0 text-gray-50"><strong>Ciudad:</strong> {{respuesta.city}}</p>
+        <p class="mb-0 text-gray-50"><strong>País:</strong> {{respuesta.country_code}}</p>
+        <p class="mb-0 text-gray-50"><strong>Organización:</strong> {{respuesta.org}}</p>
+        <p class="mb-0 text-gray-50"><strong>Proveedor:</strong> {{respuesta.isp}}</p>
+        <hr class="d-none d-lg-block mb-0 ms-0" />
+        <div id="map"></div>
+        <iframe width="500" height="400" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp={{respuesta.latitude}}~{{respuesta.longitude}}&lvl=15&typ=d&sty=r&src=SHELL&FORM=MBEDV8" scrolling="no">
+        </iframe>
+        <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
+           <a id="largeMapLink" target="_blank" href="https://www.bing.com/maps?cp={{respuesta.latitude}}~{{respuesta.longitude}}&amp;sty=r&amp;lvl=4&amp;FORM=MBEDLD">Ver Mapa en Grande</a> &nbsp;
+        </div>
+        </div>
 {%endblock%}
