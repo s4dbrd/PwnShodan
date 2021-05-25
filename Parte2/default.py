@@ -47,18 +47,23 @@ def hostscan():
     query=re.findall(r'<li>(.*?)</li>',str(filter))
     filtro=request.form.get("query")
     filtrado=request.form.get("filtrado")
-    r=session.get(webscan_base+"host/search?query="+filtro+":"+filtrado, params=payload)
-    respuesta=r.json()
-    respuestas=[]
-    for ips in respuesta["matches"]:
-        ip_list=ips["ip_str"]
-        respuestas.append(ip_list)
-    return render_template('hostscan.html', query=query, filtro=filtro, filtrado=filtrado, respuestas=respuestas)
+    if request.method=="GET":
+        return render_template('hostscan.html', query=query, filtro=filtro, filtrado=filtrado)
+    else:
+        r=session.get(webscan_base+"host/search?query="+filtro+":"+filtrado, params=payload)
+        respuesta=r.json()
+        respuestas=[]
+        for ips in respuesta["matches"]:
+            ip_list=ips["ip_str"]
+            respuestas.append(ip_list)
+        return render_template('hostscan.html', query=query, filtro=filtro, filtrado=filtrado, respuestas=respuestas)
 
 @app.route('/host/<int:ip>', methods=["GET"])
 def host(ip):
     host=session.get(webscan_base+"host/"+ip, params=payload)
     respuesta=host.json()
-    return render_template('host.html',respuesta=respuesta, ip=ip)
+    ippag=int(respuesta["ip_str"])
+    if ippag == ip:
+        return render_template('host.html',respuesta=respuesta, ippag=ippag)
 
-app.run(debug=True)
+app.run(debug=True) 
