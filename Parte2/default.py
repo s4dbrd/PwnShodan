@@ -7,10 +7,13 @@ import pdb
 
 app = Flask(__name__)
 key=os.environ["ShodanKey"]
+hbp=os.environ["HBPKey"]
 payload={'key':key}
 webscan_base="https://api.shodan.io/shodan/"
 vuln_base="https://exploits.shodan.io/api/search?query="
 session=requests.session()
+baseAPIURL = "https://haveibeenpwned.com/api/v3/"
+headers={"hibp-api-key": hbp}
 
 @app.route('/', methods=["GET"])
 def inicio():
@@ -66,4 +69,27 @@ def host(ip):
     if ippag == ip:
         return render_template('host.html',respuesta=respuesta, ippag=ippag)
 
-app.run(debug=True) 
+@app.route('/pwned/', methods=["GET","POST"])
+def pwdned():
+    query=['breachedaccount', 'pasteaccount']
+    filtro=request.form.get("query")
+    print(filtro)
+    email=request.form.get("email")
+    print(email)
+    if request.method=="GET":
+        return render_template('pwned.html', query=query, filtro=filtro, email=email)
+    else:
+        urlEndpoint = filtro+'/'+email
+        urlToFetch = baseAPIURL+urlEndpoint
+        r = session.get(urlToFetch, verify=True, headers=headers)
+        if r.status_code==200:
+            if filtro=='breachedaccount':
+                response=r.json()
+                return render_template('pwned.html', query=query, filtro=filtro, email=email, response=response)
+            else:
+                paste=r.json()
+                return render_template('pwned.html', query=query, filtro=filtro, email=email, paste=paste)
+        else:
+            response="No se ha encontrado ninguna brecha en el email: "+email
+            return render_template('pwned.html', filtro=filtro, query=query, email=email, respuesta=response)
+app.run(debug=True)
