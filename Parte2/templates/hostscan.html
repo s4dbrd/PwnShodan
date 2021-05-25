@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="#page-top">Shodan</a></li>
-                <li class="nav-item"><a class="nav-link" href="#request">Búsqueda</a></li>
+                <li class="nav-item"><a class="nav-link" href="#host">Búsqueda</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
             </ul>
         </div>
@@ -19,7 +19,7 @@
 </nav>
 {%endblock%}
 {%block content%}
-<form id="request" class="main_form" action="/hostscan/" method="POST">
+<form id="host" class="main_form" action="/hostscan/" method="POST">
     <h4>Búsqueda</h4>
     <div class="col-md-12">
     <p class="mb-0 text-gray-50"><strong> Filtrado:</strong> <select name="query"></p>

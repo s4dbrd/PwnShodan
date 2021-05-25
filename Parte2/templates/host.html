@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="#page-top">Shodan</a></li>
-                <li class="nav-item"><a class="nav-link" href="#info">Host</a></li>
+                <li class="nav-item"><a class="nav-link" href="#host">Host</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
             </ul>
         </div>
@@ -19,7 +19,7 @@
 </nav>
 {%endblock%}
 {%block content%}
-<section id="info">
+<section id="host">
     <h2>{{respuesta.ip_str}}</h2>
     <p class="mb-0 text-gray-50"><strong>Puertos Abiertos:</strong>
         {%for puertos in respuesta.ports%}
