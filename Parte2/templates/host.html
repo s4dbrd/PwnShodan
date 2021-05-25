@@ -1,6 +1,25 @@
 {%extends "base.html"%}
 {%block title%}{{respuesta.ip_str}}{%endblock%}
+{%block nav%}
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/">Inicio</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#page-top">Shodan</a></li>
+                <li class="nav-item"><a class="nav-link" href="#info">Host</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{%endblock%}
 {%block content%}
+<section id="info">
     <h2>{{respuesta.ip_str}}</h2>
     <p class="mb-0 text-gray-50"><strong>Puertos Abiertos:</strong>
         {%for puertos in respuesta.ports%}
@@ -9,14 +28,27 @@
         </p>
         <p class="mb-0 text-gray-50"><strong>Ciudad:</strong> {{respuesta.city}}</p>
         <p class="mb-0 text-gray-50"><strong>País:</strong> {{respuesta.country_code}}</p>
-        <p class="mb-0 text-gray-50"><strong>Organización:</strong> {{respuesta.org}}</p>
-        <p class="mb-0 text-gray-50"><strong>Proveedor:</strong> {{respuesta.isp}}</p>
+        {%if respuesta.org%}
+            <p class="mb-0 text-gray-50"><strong>Organización:</strong> {{respuesta.org}}</p>
+        {%endif%}
+        {%if respuesta.isp%}
+            <p class="mb-0 text-gray-50"><strong>Proveedor:</strong> {{respuesta.isp}}</p>
+        {%endif%}
+        {%if respuesta.domains%}
+            <p class="mb-0 text-gray-50"><strong>Dominios:</strong>
+                {%for dom in respuesta.domains%}
+                    {{dom}}
+                {%endfor%}
+            </p>
+        {%endif%}
         <hr class="d-none d-lg-block mb-0 ms-0" />
         <div id="map"></div>
         <iframe width="500" height="400" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp={{respuesta.latitude}}~{{respuesta.longitude}}&lvl=15&typ=d&sty=r&src=SHELL&FORM=MBEDV8" scrolling="no">
         </iframe>
         <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
-           <a id="largeMapLink" target="_blank" href="https://www.bing.com/maps?cp={{respuesta.latitude}}~{{respuesta.longitude}}&amp;sty=r&amp;lvl=4&amp;FORM=MBEDLD">Ver Mapa en Grande</a> &nbsp;
+           <a id="largeMapLink" target="_blank" href="https://www.openstreetmap.org/#map=19/{{respuesta.latitude}}/{{respuesta.longitude}}">Ver Mapa en Grande</a> &nbsp;
+           <a id="largeMapLink" target="_blank" href="https://www.shodan.io/host/{{respuesta.ip_str}}">Más Información</a> &nbsp;
         </div>
         </div>
+</section>
 {%endblock%}
