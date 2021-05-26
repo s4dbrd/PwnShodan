@@ -92,4 +92,9 @@ def pwdned():
         else:
             response="No se ha encontrado ninguna brecha en el email: "+email
             return render_template('pwned.html', filtro=filtro, query=query, email=email, respuesta=response)
+
+@app.route('/busqueda/', methods=["GET"])
+def busqueda():
+    return render_template('busqueda.html')
+    
 app.run(debug=True)
