@@ -27,21 +27,12 @@ def inicio():
     randomip=random.choice(ips)
     ipinfo=session.get(webscan_base+'host/'+randomip,params=payload)
 
-    cam=session.get(webscan_base+'host/search?query=port:554 country:es has_screenshot:1 -screenshot.label:blank city:"Sevilla"',params=payload)
-    cam.raw.chunked=True
-    cam.encoding='utf-8'
-    respuesta=cam.json()
-    ipcam=[]
-    for camera in respuesta["matches"]:
-            ip_list=camera["ip_str"]
-            ipcam.append(ip_list)
-
-    randomcamip1=random.choice(ipcam)
-    ipinfo1=session.get(webscan_base+'host/'+randomcamip1,params=payload)
     
-    randomcamip2=random.choice(ipcam)
-    ipinfo2=session.get(webscan_base+'host/'+randomcamip2,params=payload)
-    return render_template('inicio.html', randomip=randomip, answer=ipinfo.json(), randomcamip=randomcamip1, randomcamip2=randomcamip2, answer1=ipinfo1.json(), answer2=ipinfo2.json())
+    ipcam1='95.124.44.163'
+    ipinfo1=session.get(webscan_base+'host/'+ipcam1,params=payload)
+    ipcam2='83.48.82.34'
+    ipinfo2=session.get(webscan_base+'host/'+ipcam2,params=payload)
+    return render_template('inicio.html', randomip=randomip, answer=ipinfo.json(), ipcam1=ipcam1, ipcam2=ipcam2, answer1=ipinfo1.json(), answer2=ipinfo2.json())
 
 @app.route('/hostscan/', methods=["GET","POST"])
 def hostscan():
@@ -106,4 +97,4 @@ def actualizar(ip):
     return render_template('scan.html', ip=ip)
 
 port=os.environ["PORT"]
-app.run('0.0.0.0', int(port), debug=False)
+app.run('0.0.0.0', int(port), debug=True)
