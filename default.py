@@ -58,6 +58,7 @@ def hostscan():
         for ips in respuesta["matches"]:
             ip_list=ips["ip_str"]
             respuestas.append(ip_list)
+        
         return render_template('hostscan.html', query=query, filtro=filtro, filtrado=filtrado, respuestas=respuestas)
 
 @app.route('/host/<string:ip>', methods=["GET"])
@@ -96,5 +97,12 @@ def pwdned():
 def busqueda():
     return render_template('busqueda.html')
 
-port=os.environ["PORT"]
-app.run('0.0.0.0', int(port), debug=True)
+@app.route('/actualizar/<string:ip>', methods=["GET"])
+def actualizar(ip):
+    data={
+    'ips': ip
+    }
+    update=session.post(webscan_base+'scan?+ips=', data=ip, params=payload)
+    return render_template('scan.html', ip=ip)
+#port=os.environ["PORT"]
+app.run(debug=True)
