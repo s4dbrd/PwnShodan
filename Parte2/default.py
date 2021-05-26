@@ -96,4 +96,6 @@ def pwdned():
 @app.route('/busqueda/', methods=["GET"])
 def busqueda():
     return render_template('busqueda.html')
-app.run(debug=True)
+
+port=os.environ["PORT"]
+app.run('0.0.0.0', int(port), debug=True)
