@@ -1,5 +1,5 @@
 {%extends "base.html"%}
-{%block title%}Pwned{%endblock%}
+{%block title%}Búsqueda{%endblock%}
 {%block nav%}
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container px-4 px-lg-5">
@@ -19,5 +19,10 @@
 </nav>
 {%endblock%}
 {%block content%}
-
+<a href="/hostscan/">
+    <img class="img-fluid" src="{{url_for('static', filename='img/shodanredirect.png')}}" alt="..." />
+</a>
+<a href="/pwned/">
+    <img class="img-fluid" src="{{url_for('static', filename='img/hibp.png')}}" alt="..." />
+</a>
 {%endblock%}
