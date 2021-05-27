@@ -1,4 +1,4 @@
-# Shodan API
+# PwmShodan
 ### Obligatorio
 
 1. La aplicación web debe tener una vista tipo lista, donde se vea una lista de recursos de la API.
